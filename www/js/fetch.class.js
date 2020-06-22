@@ -27,14 +27,8 @@ class FETCHrequest {
                         return apiResponse.json();
                     }
                     else {
-/*                         return apiResponse.json()
-                            .then(error => reject(error))    */
-                        if(apiResponse.status === 401){
-                            reject({status: 401, message: 'Non autorisé'})
-                        } else {
-                            return apiResponse.json()
-                                .then(error => reject(error))                            
-                        }
+                        return apiResponse.json()
+                           .then(error => reject(error))
                     };
                 })
                 .then(jsonData => {
