@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             .fetch()
             .then(fetchData=>{
                 console.log(fetchData)
+                window.location.href = '/';
             })
             .catch(error=>{
                 //console.log("L'utilisateur est déjà inscrit");
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 .then(fetchData=>{
                     localStorage.setItem('name', fetchData.data.user.name);
                     console.log(fetchData)
+                    window.location.href = '/';
                 })       
             .catch(error=>{
                 console.log("Identifiant ou mot de passe incorrect");
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     btnWriting.addEventListener('click', (event)=>{
         event.preventDefault();
         let titleValue = document.querySelector('#title').value;
-        let contentValue = document.querySelector('#content').value;
+        let contentValue = tinyMCE.get('content').getContent()
 
         if(titleValue === null || contentValue === null){
             //console.log("Veuillez compléter tous les champs");
@@ -102,10 +104,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 .fetch()
                 .then(fetchData=>{
                     console.log(fetchData)
+                    window.location.href = '/';
                 })       
             .catch(error=>{
                 console.log("Identifiant ou mot de passe incorrect");
-            })            
+            })
         })
     }
     })
@@ -192,6 +195,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                             .fetch()
                             .then(fetchData=>{
                                 console.log(fetchData)
+                                window.location.href = '/';
                             })       
                         .catch(error=>{
                             console.log("Identifiant ou mot de passe incorrect");
@@ -206,7 +210,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
         }
     }
-
 
     const removeContent = () =>{
         let content = document.querySelectorAll('.trash-content');
@@ -235,6 +238,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         .catch(error=>{
             console.log(error);
         })
+        window.location.href = '/';
     }
 
     const checkAuth = ()  => {
@@ -244,14 +248,39 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 )
                 .fetch()
                 .then(fetchData=>{
-                    if (fetchData != null)
+                    if (fetchData != null) {
                         document.getElementById('registerForm').style.display = 'none';
                         document.getElementById('loginForm').style.display = 'none';
-                        bienvenue.innerHTML = `Bienvenue ${fetchData.data.user.name}`
+                        bienvenue.innerHTML = `Bienvenue ${fetchData.data.user.name}  <button id="btnLogout" type="submit">Se déconnecter</button> `
+                        let btnLogout = document.querySelector('#btnLogout');
+                            btnLogout.addEventListener('click', ()=>{
+                                    localStorage.removeItem('email');
+                                    localStorage.removeItem('password');
+                                    localStorage.removeItem('name');
+                                    new FETCHrequest(
+                                        apiUrl+'/logout',
+                                        'GET',
+                                    )
+                                    .fetch()
+                                    .then(fetchData=>{
+                                        console.log(fetchData)
+                                        window.location.href = '/';
+                                    })       
+                                    .catch(error=>{
+                                        console.log(error)
+                                    })
+                                    
+                                    
+                                })    
+                            } else {
+                                console.log("Pas connecté");
+                            }       
                 })
                 .catch(error=>{
                     console.log(error)
-                })              
+                })
+                            
+                
         } 
     checkAuth();
     getWritings();

@@ -110,6 +110,33 @@ Routes definition
                         };
                     });
                 });
+
+                this.router.get('/auth/logout', this.passport.authenticate('jwt', { session: false }), (req, res) => {
+                    // Get user info and post list from user _id (req.user._id)
+                    Promise.all([
+                        UserModel.findById(req.user._id),
+                    ])
+                    .then( mongoData => {
+                        res.cookie(process.env.COOKIE_NAME, null);
+                        return res.status(200).json({
+                            method: 'POST',
+                            route: `/api/mongo/auth/me`,
+                            data: { user: mongoData[0]},
+                            error: null,
+                            status: 200
+                        });
+                    })
+                    .catch( mongoErr => {
+                        return res.status(500).json({
+                            method: 'POST',
+                            route: `/api/mongo/auth/me`,
+                            data: null,
+                            error: mongoErr,
+                            status: 500
+                        });
+                    });
+                });
+            //
             //
 
             /* 
