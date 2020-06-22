@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WebApp Projet Perso</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.tiny.cloud/1/sp2pxd4imsvqcsiiulg85we7ta30melra8mpf2jcyrw39em4/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>    </head>
+        <script>
+            tinymce.init({
+              selector: 'textarea',
+              plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+              toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+              toolbar_mode: 'floating',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Author name',
+            });
+          </script>
+    <body>
+        <header>
+            <h1 id="bienvenue"> Site d'Alex </h1>
+        </header>
+        <main>
+            <div id="registerForm" class="d-flex flex-row">
+            <form>
+                    <label for="name">Nom :</label>
+                    <input type="text" id="nameRegister">
+                    <label for="email">Email :</label>
+                    <input type="text" id="emailRegister">
+                    <label for="password">Password :</label>
+                    <input type="password" id="passwordRegister">
+                    <button id="btnRegister" type="submit">S'inscrire</button>
+            </form>
+            </div>
+            <div id="loginForm" class="d-flex flex-row">
+            <form>
+                    <label for="email">Email :</label>
+                    <input type="text" id="emailLogin">
+                    <label for="password">Password :</label>
+                    <input type="password" id="passwordLogin">
+                    <button id="btnLogin" type="submit">Se connecter</button>
+            </form>
+            </div>
+            <div id="writingPost" class="d-flex flex-row">
+            <form>
+                <label for="name">Nom :</label>
+                <input type="text" id="title">
+                <textarea id="content">
+                </textarea>
+                <button id="btnWriting" type="submit">Créer</button>
+            </form>
+              </div>
+              <div id="writingList"> </div>
+              <div id="modify"> </div> 
+        </main>
+        <footer>
+            <p>Alex Lys 2020 - Under <a href="https://en.wikipedia.org/wiki/WTFPL" target="_blank">WTFPL</a></p>
+        </footer>
+
+        <script src="https://kit.fontawesome.com/3ad9cb1e70.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+        <script src="./js/fetch.class.js"></script>
+        <script src="./js/app.js"></script>
+    </body>
+</html>
