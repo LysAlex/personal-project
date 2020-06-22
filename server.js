@@ -14,7 +14,6 @@ Imports
 
     // Inner modules
     const MONGOclass = require('./services/mongo.class');
-    const MYSQLClass = require('./services/mysql.class');
 //
 
 
@@ -34,8 +33,6 @@ Server class
             // Instanciate MongoDB
             this.MONGO = new MONGOclass;
 
-            // Instanciate MYSQL
-            this.MYSQL = new MYSQLClass;
         }
 
         init(){
@@ -69,25 +66,6 @@ Server class
             // Start server configuration
             this.configMongo();
         };
-
-        configMySql(){
-            this.MYSQL.connectDb()
-            .then( connection => {
-                // Set MySQL router
-                const CrudMySqlRouterClass = require('./routers/crud.mysql.router');
-                const crudmySqlRouter = new CrudMySqlRouterClass(connection);
-                server.use('/api', crudmySqlRouter.init());
-
-                // Set front router
-                server.get('/*',  (req, res) => res.render('index') );
-
-                // Launch server
-                this.launch();
-            })
-            .catch( connectionError => {
-                console.log(`MYsql connection error: ${connectionError}`)
-            })
-        }
 
         configMongo(){
             // Authentication
