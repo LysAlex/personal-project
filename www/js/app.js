@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     if (fetchData != null) {
                         document.getElementById('registerForm').style.display = 'none';
                         document.getElementById('loginForm').style.display = 'none';
+                        document.getElementById('writingPost').style.display = 'block';
                         bienvenue.innerHTML = `Bienvenue ${fetchData.data.user.name}  <button id="btnLogout" type="submit">Se déconnecter</button> `
                         let btnLogout = document.querySelector('#btnLogout');
                             btnLogout.addEventListener('click', ()=>{
